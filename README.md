@@ -6,7 +6,15 @@ Run this program in the background and press ALT+q anytime to show program-selec
 
 #### Installation
 
+Download latest relese on the right and install.
+
+#### Build from Source:
+
 Make sure to run setup.py in a clean (conda) environment, or expect slow and large builds
+
+```
+pip install -r requirements.txt
+```
 
 - Create an .exe file:
 ```
