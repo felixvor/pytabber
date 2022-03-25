@@ -176,9 +176,9 @@ class TrayIcon(Tk):
 
 if __name__ == "__main__":
 
-    for p in psutil.process_iter():
-        if "pytabber" in p.name().lower():
-            quit() # process already running
+    # for p in psutil.process_iter():
+    #     if "pytabber" in p.name().lower():
+    #         raise Exception("Already Running")
             
     app = TrayIcon()
     app.mainloop()
