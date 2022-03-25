@@ -1,15 +1,14 @@
 # Import the required libraries
 import win32gui
 import win32com.client
-import tkinter
 import keyboard
 import threading
-
-from tkinter import *
-from pystray import MenuItem as item
-import pystray
+import psutil
 import screeninfo
 
+from tkinter import Tk, Button
+from pystray import MenuItem as item
+from pystray import Icon
 from PIL import Image
 
 
@@ -110,7 +109,7 @@ class TabberManager():
         win32gui.SetForegroundWindow(int(handler_id))
         closed = True
 
-class TrayIcon(tkinter.Tk):
+class TrayIcon(Tk):
 
     # Define a function for quit the selfdow
     def quit_window(self, icon, item):
@@ -128,9 +127,9 @@ class TrayIcon(tkinter.Tk):
     # Hide the window and show on the system taskbar
     def hide_window(self):
         self.withdraw()
-        image=Image.open("./tab-key.png")
+        image=Image.open("./tab-key.ico")
         menu=(item('Quit', self.quit_window), item('Settings', self.show_window))
-        icon=pystray.Icon("Pytabber", image, "Pytabber", menu)
+        icon=Icon("Pytabber", image, "Pytabber", menu)
         icon.run()
 
 
@@ -173,5 +172,8 @@ class TrayIcon(tkinter.Tk):
 
 
 if __name__ == "__main__":
+    if "pytabber" in (p.name() for p in psutil.process_iter()):
+        quit()
+
     app = TrayIcon()
     app.mainloop()
