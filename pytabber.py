@@ -31,9 +31,12 @@ class TabberManager():
         # get list of running programs:
         def callback(hwnd, win_list):
             if win32gui.IsWindowVisible(hwnd):
-                window_title = win32gui.GetWindowText(hwnd)
+                window_title = win32gui.GetWindowText(hwnd).lower()
 
                 if "pytabber" in window_title: #ignore pytabber window itself
+                    return True
+                
+                if "program manager" in window_title: #ignore pytabber window itself
                     return True
 
                 left, top, right, bottom = win32gui.GetWindowRect(hwnd)
@@ -44,8 +47,8 @@ class TabberManager():
 
         win_list = dict() # dict of window name to process handler id
         win32gui.EnumWindows(callback, win_list)  # populate list 
-        print("Collected Running Programs")
-        print(win_list)
+        # print("Collected Running Programs")
+        # print(win_list)
 
         global closed
         closed = False
@@ -53,7 +56,7 @@ class TabberManager():
         self.tabberWindows = list()
 
         for m in screeninfo.get_monitors():
-            print(str(m))
+            # print(str(m))
 
             screen_width = m.width
             screen_height = m.height
@@ -91,7 +94,7 @@ class TabberManager():
             if closed:
                 win.destroy()
             win.after(0, check_if_closed)  # reschedule
-        win.after(2000, check_if_closed)
+        win.after(200, check_if_closed)
         
         for window_name, handler in win_list.items():
             b = Button(master=win, text= window_name, command=lambda handler_id=handler: self.bring_to_front(handler_id))
@@ -121,7 +124,7 @@ class TrayIcon(Tk):
     def show_window(self, icon, item):
         if icon:
             icon.stop()
-        self.after(0,self.deiconify())
+        self.after(50,self.deiconify())
 
 
     # Hide the window and show on the system taskbar
