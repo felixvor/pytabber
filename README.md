@@ -6,7 +6,7 @@ Run this program in the background and press ALT+q anytime to show program-selec
 
 #### Installation
 
-Download latest relese on the right and install.
+[Download latest msi release](https://github.com/DieseKartoffel/pytabber/releases) and install on Windows.
 
 #### Build from Source:
 
